@@ -90,7 +90,8 @@ ros_primitive_types = [
 ]
 ros_header_types = ["Header", "std_msgs/Header", "roslib/Header"]
 ros_binary_types = ["uint8[]", "char[]", "sequence<uint8>", "sequence<char>"]
-list_tokens = re.compile("<(.+?)>")
+# Remove the list type wrapper, and length specifier, from rostypes i.e. sequence<double, 3>
+list_tokens = re.compile("<(.+?)(, \d+)?>")
 bounded_array_tokens = re.compile(r"(.+)\[.*\]")
 ros_binary_types_list_braces = [
     ("uint8[]", re.compile(r"uint8\[[^\]]*\]")),
